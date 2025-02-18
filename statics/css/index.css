@@ -1,0 +1,979 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    /* width: 100%;
+    height: 100%; */
+    width: 1920px;
+    height: 1080px;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    position: relative;
+    overflow: hidden;
+}
+
+#main {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background: url(../images/bg.jpg);
+    background-size: 100% 100%;
+    position: relative;
+}
+
+.hide-g {
+    display: none !important;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #e56e6e;
+    border-radius: 4px;
+}
+
+#canvas img{
+    border-radius: 50%;
+}
+
+.button-g {
+    background: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    color: #333;
+    line-height: 16px;
+    user-select: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.button-g:hover {
+    transform: scale(1.05);
+}
+
+.button-g + .button-g {
+    margin-left: 12px;
+}
+
+.button-g.primary {
+    background: #4dabf7;
+    color: #fff;
+    border-color: #339af0;
+}
+
+.button-g.primary:hover {
+    background: #339af0;
+}
+
+.button-g.success {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.button-g.success:hover {
+    background: rgba(105, 219, 124, 0.8);  /* 柔和的绿色 */
+    border-color: rgba(81, 207, 102, 0.8);  /* 深一点的绿色边框 */
+    color: #fff;
+}
+
+.button-g.warning {
+    background: #ffd43b;
+    color: #fff;
+    border-color: #fcc419;
+}
+
+.button-g.warning:hover {
+    background: #fcc419;
+}
+
+.button-g.error {
+    background: #ff8787;
+    color: #fff;
+    border-color: #ff6b6b;
+}
+
+.button-g.error:hover {
+    background: #ff6b6b;
+}
+
+#hidePrizeBtn{
+    cursor: pointer;
+}
+
+#mask {
+    background: rgba(0, 0, 0, .45);
+    backdrop-filter: blur(5px);
+    z-index: 1;
+    /* height: 100%;
+    width: 100%; */
+    width: 1920px;
+    height: 1080px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#prizeShow {
+    position: absolute;
+    top: 50%;
+    left: 60px;
+    transform: translate3d(0%, -50%, 0);
+    z-index: 2;
+    transition: all .3s;
+    border: none;
+    box-shadow: 0 8px 32px rgba(254, 246, 205, 0.4);
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(12px);
+    width: 520px;
+    color: #fff;
+    max-height: calc(100% - 24px);
+}
+
+#prizeShow.is-narrow {
+    width: 240px;
+    height: 240px;
+    top: 12px;
+    left: 12px;
+    transform: translate3d(0, 0, 0);
+}
+
+#prizeShow td{
+    border: none;
+    padding: 0px 16px;
+    border-bottom: 1px solid #dfdfdf;
+    line-height: 32px;
+}
+#prizeShow tr:last-child td{
+    border-bottom: none;
+}
+
+.prize {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    display: flex;
+    align-items: center;
+    z-index: 0;
+    max-width: calc(50% - 24px);
+}
+
+#resetBtn {
+    position: absolute;
+    top: -700px;  /* 调整到顶部位置 */
+    left: 0;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.1);  /* 半透明背景 */
+    border: 1px solid rgba(255, 255, 255, 0.2);  /* 淡化边框 */
+    color: rgba(255, 255, 255, 0.4);  /* 淡化文字颜色 */
+    transition: all 0.3s ease;  /* 添加过渡效果 */
+    margin-right: 15px; /* Add margin to the right */
+}
+
+#resetBtn:hover {
+    background: rgba(255, 135, 135, 0.8);  /* 悬停时显示原来的红色 */
+    border-color: rgba(255, 107, 107, 0.8);
+    color: #fff;
+}
+
+#result {
+    position: absolute;
+    width: 1920px;
+    height: 1080px;
+    top: 0;
+    left: 0;
+    display: block;
+    z-index: 1;
+}
+
+#resultRow {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#result .item {
+    /* background: #fff; */
+    /* padding: 16px; */
+    margin: 12px;
+    border-radius: 8px;
+    width: 420px;
+    position: relative;
+}
+
+#result .item img{
+    width: 100%;
+}
+
+#result .item .name {
+    text-align: center;
+    color: #333;
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    bottom: 3px;
+    left: 10%;
+    height: 80px;
+    width: 80%;
+    align-items: center;
+    align-content: center;
+}
+
+#result .item .name span{
+    text-align: center;
+    font-size: 28px;
+    border-radius: 4px;
+    padding: 6px 0;
+    color: #eb0612;
+    line-height: 18px;
+    flex: 1;
+    min-width: 100px;
+}
+
+.close-btn {
+    font-size: 60px;
+    position: absolute;
+    top: 0px;
+    right: 24px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 100;
+    transform: rotate(45deg);
+}
+
+.operate {
+    position: absolute;
+    bottom: 12px;
+    left: 260px;  /* 调整到指定位置 */
+    display: flex;
+    align-items: center;
+    z-index: 0;
+    max-width: calc(100% - 24px);
+}
+
+.operate .input {
+    width: 80px;
+    background: #fff;
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: 2px solid #e9ecef;
+    outline: none;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.operate .input:focus {
+    border-color: #4dabf7;
+}
+
+.operate #startBtn {
+    margin-left: 12px;
+}
+
+.operate #startBtn,
+.operate #pauseBtn {
+    min-width: 100px;
+}
+
+.prize-table .row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.prize-table .row:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.prize-table .row:last-child {
+    border-bottom: none;
+}
+
+.prize-table .row span:nth-child(2) {
+    margin-left: 10px;
+    width: 16%;
+    font-weight: 500;
+}
+
+.prize-table .row span:nth-child(3) {
+    width: 74%;
+    /* color: rgba(255, 255, 255, 0.9); */
+}
+
+.prize-table .row span:nth-child(4) {
+    width: 10%;
+    text-align: right;
+    /* color: #e56e6e; */
+}
+
+.prize-table .row.disabled {
+    opacity: 0.5;
+}
+
+.prize-table .row.disabled.highlight {
+    opacity: 1;
+    background: rgba(229, 110, 110, 0.15);
+}
+
+.prize-table .row.disabled.highlight:hover {
+    background: rgba(229, 110, 110, 0.25);
+}
+
+.prize-table .row .redraw-input {
+    width: 60px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    color: #fff;
+    padding: 2px 6px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+.prize-table .row .redraw-input:focus {
+    border-color: #e56e6e;
+    outline: none;
+}
+
+.prize-table input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    margin-right: 8px;
+}
+
+.prize-table input[type="checkbox"]::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.prize-table input[type="checkbox"]:hover::before {
+    border-color: #e56e6e;
+}
+
+.prize-table input[type="checkbox"]:disabled::before {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    cursor: not-allowed;
+}
+
+.prize-table input[type="checkbox"]:checked::before {
+    content: "\2713";
+    background-color: #e56e6e;
+    border-color: #e56e6e;
+    color: #fff;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+}
+
+.tableTitle{
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
+    font-weight: bold;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px 16px 0 0;
+    color: #fff;
+}
+
+.tableTitle .title-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.tableTitle .title-button {
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.tableTitle .title-button:hover {
+    color: #e56e6e;
+}
+
+.tableCont {
+    max-height: 560px;
+    overflow: auto;
+    padding: 10px 0;
+    background: rgba(0, 0, 0, 0.18);
+}
+
+.lockBtn{
+    margin:0 10px;
+    opacity: 0.2;
+    cursor: pointer;
+}
+
+#prizeImg {
+    position: absolute;
+    z-index: 8;
+    transition: all .3s;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.6);
+    /* width: 100%;
+    height: 100%; */
+    width: 1920px;
+    height: 1080px;
+    color: #333;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.prize-container {
+    width: 80%;
+    max-width: 2000px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.prizeImgItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px;
+    flex: 0 1 auto;
+}
+
+.prizeImgItem img{
+    width: 240px;
+}
+
+#showPrizeImgBtn{
+    position: relative;
+}
+#showPrizeImgBtn p{
+    position: absolute;
+    bottom: 105%;
+    left: 0;
+    margin: 0;
+    color: #fff;
+    cursor: pointer;
+    padding: 8px 0;
+    z-index: 9;
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+    border-radius: 4px;
+    line-height: 28px;
+    text-align: center;
+}
+#showPrizeImgBtn p span{
+    cursor: pointer;
+    display: block;
+}
+#showPrizeImgBtn p span:hover{
+    cursor: pointer;
+}
+.prizeImgItem-0 img{
+    width: 520px;
+}
+.prizeImgItem-1 img{
+    width: 320px;
+}
+.prizeImgItem-2 img{
+    width: 320px;
+}
+.prizeImgItem-3 img{
+    width: 320px;
+}
+.prizeImgItem-4 img{
+    width: 320px;
+}
+
+#canvas li img {
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#canvas li a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+}
+
+
+
+.prize-name {
+    margin-top: 10px;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+.winners-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 60px);
+    max-height: calc(100% - 60px);
+    overflow: auto;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.winners-grid {
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto auto;  /* 两行 */
+    gap: 15px;
+    padding: 15px;
+}
+
+/* 第一行显示3个 */
+.winners-grid > .winner-card:nth-child(-n+3) {
+    grid-row: 1;
+}
+
+/* 第二行显示4个 */
+.winners-grid > .winner-card:nth-child(n+4) {
+    grid-row: 2;
+}
+
+/* 调整每行的布局 */
+.winners-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);  /* 分成4列 */
+    justify-items: center;
+}
+
+/* 第一行三个居中 */
+.winners-grid > .winner-card:nth-child(-n+3) {
+    grid-column: auto;
+    transform: translateX(25%);  /* 向右偏移一个位置的距离 */
+}
+
+.winner-card {
+    width: 100px;  /* 稍微调整卡片大小 */
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    padding: 8px;
+    margin: 0;  /* 移除原有margin，使用gap控制间距 */
+    transition: transform 0.3s ease;  /* 添加过渡效果 */
+}
+
+.winner-avatar {
+    width: 75px;  /* 调整头像大小 */
+    height: 75px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #fff;
+}
+
+.winner-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.winner-name {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;  /* 防止名字换行 */
+}
+
+.winner-prize {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #e56e6e;
+    font-weight: bold;
+}
+
+#result .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    font-size: 32px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.prize-image {
+    position: relative;
+    display: inline-block;
+    margin-right: 0;
+}
+
+.prize-image img {
+    max-width: 300px;
+    height: auto;
+    display: block;
+}
+
+.prize-image + .prize-image {
+    margin-left: 0;
+}
+
+.prize-images {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 1;
+}
+
+.prize-sections {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.prize-section {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 215, 0, 0.5);
+    backdrop-filter: blur(10px);
+    width: 550px;  /* 增加一点宽度以适应新布局 */
+}
+
+.prize-section .prize-image {
+    width: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.prize-section .prize-image img {
+    width: 320px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+/* 特殊奖项样式 */
+.prize-section:nth-child(1) {
+    border-color: rgba(255, 215, 0, 0.8);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.prize-section:nth-child(2) {
+    border-color: rgba(192, 192, 192, 0.8);
+    box-shadow: 0 0 20px rgba(192, 192, 192, 0.3);
+}
+
+.prize-section:nth-child(3) {
+    border-color: rgba(205, 127, 50, 0.8);
+    box-shadow: 0 0 20px rgba(205, 127, 50, 0.3);
+}
+
+/* 隐藏奖样式 */
+.prize-section.hidden-prize {
+    width: auto;
+    min-width: 550px;  /* 与特等奖宽度保持一致 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.prize-section.hidden-prize .winners-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    padding: 25px;
+    width: 100%;
+}
+
+.prize-section.hidden-prize .winner-card {
+    width: 100px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.prize-section.hidden-prize .winner-avatar {
+    width: 85px;
+    height: 85px;
+}
+
+.prize-section.hidden-prize .winner-name {
+    margin-top: 10px;
+    font-size: 14px;
+    width: 100%;
+    text-align: center;
+}
+
+.tableCont::-webkit-scrollbar {
+    width: 6px;
+}
+
+.tableCont::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.tableCont::-webkit-scrollbar-thumb {
+    background: rgba(229, 110, 110, 0.5);
+    border-radius: 3px;
+}
+
+.tableCont::-webkit-scrollbar-thumb:hover {
+    background: rgba(229, 110, 110, 0.8);
+}
+
+/* Add styles for export button and dropdown */
+.export-container {
+    position: absolute;
+    top: -700px;
+    left: 80px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;  /* 防止换行 */
+    min-width: 200px;     /* 确保最小宽度 */
+}
+
+.export-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    padding: 8px 12px;    /* 减小内边距 */
+    border-radius: 20px;
+    font-size: 14px;
+    line-height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+}
+
+.export-btn:hover {
+    background: rgba(77, 171, 247, 0.8);
+    border-color: rgba(51, 154, 240, 0.8);
+    color: #fff;
+    transform: scale(1.05);
+}
+
+.export-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% - 5px);  /* 减少与按钮的间距 */
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 8px;
+    padding: 8px 0;
+    min-width: 160px;
+    margin-top: 5px;
+    border: 1px solid rgba(77, 171, 247, 0.2);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    pointer-events: none;  /* 初始状态不接受鼠标事件 */
+}
+
+/* 删除hover显示，只保留.show类的样式 */
+.export-dropdown.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;  /* 显示时接受鼠标事件 */
+    animation: fadeInUp 0.3s ease forwards;
+}
+
+/* 删除之前的hover相关样式 */
+/* .export-container:hover .export-dropdown,
+.export-dropdown:hover {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+} */
+
+/* 添加一个透明的缓冲区域 */
+.export-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -20px;  /* 向上延伸20px */
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: transparent;
+}
+
+.export-item {
+    padding: 8px 16px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;  /* 防止文字换行 */
+}
+
+.export-item:hover {
+    background: rgba(77, 171, 247, 0.3);
+    color: #fff;
+}
+
+/* 添加动画效果 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 添加新的按钮样式 */
+.button-g.blue-btn {
+    background: rgba(77, 171, 247, 0.8);
+    border-color: rgba(51, 154, 240, 0.8);
+    color: #fff;
+}
+
+.button-g.blue-btn:hover {
+    background: rgba(51, 154, 240, 0.9);
+    transform: scale(1.05);
+}
+
+/* 普通奖品的网格布局 */
+.prize-section:not(.hidden-prize) .winners-grid {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+}
+
+/* 每一行的通用样式 */
+.prize-section:not(.hidden-prize) .winners-row {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* 7人布局 */
+.prize-section:not(.hidden-prize) .winners-grid.seven-winners .winners-row:first-child {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.prize-section:not(.hidden-prize) .winners-grid.seven-winners .winners-row:last-child {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* 5人布局 */
+.prize-section:not(.hidden-prize) .winners-grid.five-winners .winners-row:first-child {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.prize-section:not(.hidden-prize) .winners-grid.five-winners .winners-row:last-child {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Add styles for hide button */
+.hide-btn {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.1);
+    border: none;
+    cursor: pointer;
+    padding: 4px 8px;    /* 减小内边距 */
+    font-size: 14px;
+    line-height: 16px;
+    transition: all 0.3s ease;
+    margin-left: 10px;    /* 减小左边距 */
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.hide-btn:hover {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.winners-center-container {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;  /* 添加卡片之间的间距 */
+    flex-wrap: wrap;  /* 确保在需要时可以换行 */
+}

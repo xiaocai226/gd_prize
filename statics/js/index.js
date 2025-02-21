@@ -43,11 +43,14 @@ const getCanvasSpeed = () => {
 const generateMemberListHtml = () => {
     const html = [`<ul>`]
     memberList.forEach((member, index) => {
+        // <img src="./statics/images/member/${member.name}.png" 
+        // alt="${member.name}">
         html.push(`
             <li> 
                 <a>
-                    <img src="./statics/images/member/${member.name}.png" 
-                         alt="${member.name}">
+                    <div class="member-circle">
+                        ${member.name}
+                    </div>
                 </a>
             </li>
         `)
@@ -64,55 +67,31 @@ const canvasInit = () => {
     canvasEl.innerHTML = generateMemberListHtml()
     globalProps.el.main.appendChild(canvasEl)
     TagCanvas.Start("canvas", "", {
+        // initial: getCanvasSpeed(),
+        // shuffleTags: true,// 随机排序
+        // wheelZoom: false,// 鼠标滚轮缩放
+        // // 圆形
+        // dragControl: 1,// 拖拽控制
+        // imageScale: 0.2, // 控制图片缩放比例
+        // textFont: null,// 字体
+        // textColour: "＃fff",// 文字颜色
+        // // textHeight: 10,// 文字高度
+        // // imageRadius: 10, // 控制图片半径
+        // // imageMode: "both", // 同时显示图片和文字
+        // // imagePosition: "top", // 图片位置
+        // // outlineMethod: "none", // 移除轮廓
+
         initial: getCanvasSpeed(),
         shuffleTags: true,// 随机排序
         wheelZoom: false,// 鼠标滚轮缩放
-        // 圆形
+        textHeight: 20, // 增加文字高度
+        textColour: "#fff",// 文字颜色
+        outlineMethod: "none", // 移除轮廓
         dragControl: 1,// 拖拽控制
-        imageScale: 0.2, // 控制图片缩放比例
-        textFont: null,// 字体
-        textColour: "＃fff",// 文字颜色
-        // textHeight: 10,// 文字高度
-        // imageRadius: 10, // 控制图片半径
-        // imageMode: "both", // 同时显示图片和文字
-        // imagePosition: "top", // 图片位置
-        // outlineMethod: "none", // 移除轮廓
-
-        // 圆柱
-        // textColour: '#fff',
-        // outlineColour: '#ff00ff',
-        // reverse: true,
-        // depth: 0.8,
-        // maxSpeed: 0.05,
-        // weight: true,
-        // shape: 'vcylinder',
-        // noSelect: true,
-        // // textHeight: 14,// 文字高度
-        // // freezeActive: true,// 冻结选中
-        // stretchX: 1.8,// 拉伸x
-        // stretchY: 0.8,// 拉伸y
-
-        // // 垂直圆柱形
-        // // textColour: '#fff',
-        // // outlineColour: '#ff00ff',
-        // shape: 'vcylinder',  // 垂直圆柱形
-        // reverse: true,// 反向   
-        // depth: 0.1,// 深度
-        // // maxSpeed: 0.03,  // 降低速度使显示更清晰
-        // weight: true,// 权重
-        // noSelect: true,// 禁止选择
-        // // textHeight: 14,// 文字高度
-        // // freezeActive: true,// 冻结选中
-        // stretchX: 1.2,     // 减小水平拉伸，使其更协调
-
-        // stretchY: 1,       // 保持垂直方向正常
-        // radiusX: 1,        // 调整为相同的半径使其更稳定
-        // radiusY: 1,        // 调整为相同的半径使其更稳定
-        // radiusZ: 1,        // 调整为相同的半径使其更稳定
-        // zoom: 1,           // 正常缩放
-        // pinchZoom: true,   // 保持触摸缩放
-        // animTiming: 'Smooth',  // 平滑动画
-        // dragControl: false  // 禁用拖拽以保持稳定
+        noSelect: true, // 禁止选择
+        depth: 0.8, // 调整深度
+        maxSpeed: 0.05, // 降低速度使显示更清晰
+        weight: true // 启用权重
     })
 }
 

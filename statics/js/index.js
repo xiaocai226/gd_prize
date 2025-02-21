@@ -83,7 +83,7 @@ const canvasInit = () => {
         initial: getCanvasSpeed(),
         shuffleTags: true,// 随机排序
         wheelZoom: false,// 鼠标滚轮缩放
-        textHeight: 20, // 增加文字高度
+        textHeight: 26, // 增加文字高度
         textColour: "#fff",// 文字颜色
         outlineMethod: "none", // 移除轮廓
         dragControl: 1,// 拖拽控制

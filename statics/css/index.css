@@ -572,7 +572,7 @@ body {
 /* 修改获奖者姓名样式 */
 .winner-name {
     margin: 8px 0;
-    font-size: 24px;  /* 增大字号 */
+    font-size: 26px;  /* 增大字号 */
     font-weight: 600;
     color: #fff;
     text-align: center;

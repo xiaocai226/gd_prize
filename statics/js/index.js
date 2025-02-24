@@ -469,15 +469,23 @@ const showNewLuckMemberResult = () => {
     
     if (globalProps.isHiddenPrize) {
         // 隐藏奖的显示逻辑
+        const winners = globalProps.nowHiddenLuckMemberIndexArr;
+        const rows = Math.ceil(winners.length / 5); // 每行5个
         let winnersHtml = ``;
-        globalProps.nowHiddenLuckMemberIndexArr.forEach((index) => {
-            const winner = memberList[index];
-            winnersHtml += `
-                <div class="winner-card">
-                    <div class="winner-name">${winner.name}</div>
-                </div>
-            `;
-        });
+        
+        for (let i = 0; i < rows; i++) {
+            const rowWinners = winners.slice(i * 5, (i + 1) * 5);
+            const rowHtml = rowWinners.map(index => {
+                const winner = memberList[index];
+                return `
+                    <div class="winner-card">
+                        <div class="winner-name">${winner.name}</div>
+                    </div>
+                `;
+            }).join('');
+            
+            winnersHtml += `<div class="winners-row">${rowHtml}</div>`;
+        }
         
         prizeSectionsHtml = `
             <div class="prize-section hidden-prize">
@@ -485,22 +493,25 @@ const showNewLuckMemberResult = () => {
                     <img src="./statics/images/prize-min/27.png" alt="隐藏奖"/>
                 </div>
                 <div class="winners-grid">
-                    <div class="winners-center-container">
-                        ${winnersHtml}
-                    </div>
+                    ${winnersHtml}
                 </div>
             </div>
         `;
     } else {
-        // 修改普通奖品的显示逻辑
+        // 常规奖品的显示逻辑
         let startIndex = 0;
         prizeSectionsHtml = globalProps.nowPrizeObj.map(prize => {
             const prizeWinners = globalProps.nowLuckMemberIndexArr
                 .slice(startIndex, startIndex + prize.memberNum);
             
-            // 生成行HTML
-            const generateRowHtml = (winners) => {
-                return winners.map(index => {
+            // 计算行数
+            const rows = Math.ceil(prizeWinners.length / 5); // 每行5个
+            let winnersHtml = ``;
+            
+            // 生成每一行的HTML
+            for (let i = 0; i < rows; i++) {
+                const rowWinners = prizeWinners.slice(i * 5, (i + 1) * 5);
+                const rowHtml = rowWinners.map(index => {
                     const winner = memberList[index];
                     return `
                         <div class="winner-card">
@@ -508,7 +519,9 @@ const showNewLuckMemberResult = () => {
                         </div>
                     `;
                 }).join('');
-            };
+                
+                winnersHtml += `<div class="winners-row">${rowHtml}</div>`;
+            }
             
             startIndex += prize.memberNum;
             
@@ -518,7 +531,7 @@ const showNewLuckMemberResult = () => {
                         <img src="./statics/images/prize-min/${prize.id}.png" alt="${prize.name}"/>
                     </div>
                     <div class="winners-grid">
-                        <div class="winners-row">${generateRowHtml(prizeWinners)}</div>
+                        ${winnersHtml}
                     </div>
                 </div>
             `;

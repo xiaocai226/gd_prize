@@ -538,8 +538,6 @@ body {
     height: 30px;
 }
 
-
-
 .prize-name {
     margin-top: 10px;
     font-size: 24px;
@@ -563,23 +561,43 @@ body {
 
 .winners-grid {
     width: 100%;
-    display: grid;
-    grid-template-rows: auto auto;  /* 两行 */
-    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     padding: 15px;
 }
 
-/* 调整每行的布局 */
-.winners-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);  /* 分成4列 */
-    justify-items: center;
+/* 修改 winners-row 的样式 */
+.winners-row {
+    display: flex;
+    justify-content: center;
+    gap: 25px;  /* 增加水平间距 */
+    width: 100%;
 }
 
+/* 修改 winner-card 的样式 */
 .winner-card {
-    transition: transform 0.3s ease;  /* 添加过渡效果 */
-    width: 70px;
-    border: 1px solid blanchedalmond;
+    flex: 0 0 100px;  /* 固定宽度，不伸缩 */
+    /* border: 1px solid rgba(255, 215, 0, 0.3); */
+    /* padding: 6px 10px; */
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.winner-card:hover {
+    transform: scale(1.05);
+}
+
+/* 修改获奖者姓名样式 */
+.winner-name {
+    margin: 8px 0;
+    font-size: 24px;  /* 增大字号 */
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
 }
 
 .winner-avatar {
@@ -595,16 +613,6 @@ body {
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-}
-
-.winner-name {
-    margin: 8px 0;
-    font-size: 20px;
-    font-weight: 600;
-    color: #fff;
-    text-align: center;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    white-space: nowrap;  /* 防止名字换行 */
 }
 
 .winner-prize {
@@ -671,7 +679,7 @@ body {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     border: 2px solid rgba(255, 215, 0, 0.5);
     backdrop-filter: blur(10px);
-    width: 550px;  /* 增加一点宽度以适应新布局 */
+    width: 600px;  /* 增加一点宽度以适应新布局 */
 }
 
 .prize-section .prize-image {
@@ -711,7 +719,7 @@ body {
 /* 隐藏奖样式 */
 .prize-section.hidden-prize {
     width: auto;
-    min-width: 550px;  /* 与特等奖宽度保持一致 */
+    min-width: 600px;  /* 与特等奖宽度保持一致 */
     display: flex;
     flex-direction: column;
     align-items: center;

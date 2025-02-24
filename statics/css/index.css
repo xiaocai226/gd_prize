@@ -135,7 +135,7 @@ body {
 
 #prizeShow {
     position: absolute;
-    top: 65%;
+    top: 80%;
     left: 60px;
     transform: translate3d(0%, -50%, 0);
     z-index: 2;
@@ -512,20 +512,17 @@ body {
 #showPrizeImgBtn p span:hover{
     cursor: pointer;
 }
-.prizeImgItem-0 img{
+.prizeImgItem-1 img{
     width: 520px;
 }
-.prizeImgItem-1 img{
-    width: 320px;
-}
 .prizeImgItem-2 img{
-    width: 320px;
+    width: 520px;
 }
 .prizeImgItem-3 img{
-    width: 320px;
+    width: 520px;
 }
 .prizeImgItem-4 img{
-    width: 320px;
+    width: 520px;
 }
 
 #canvas li img {
@@ -572,16 +569,6 @@ body {
     padding: 15px;
 }
 
-/* 第一行显示3个 */
-.winners-grid > .winner-card:nth-child(-n+3) {
-    grid-row: 1;
-}
-
-/* 第二行显示4个 */
-.winners-grid > .winner-card:nth-child(n+4) {
-    grid-row: 2;
-}
-
 /* 调整每行的布局 */
 .winners-grid {
     display: grid;
@@ -589,20 +576,10 @@ body {
     justify-items: center;
 }
 
-/* 第一行三个居中 */
-.winners-grid > .winner-card:nth-child(-n+3) {
-    grid-column: auto;
-    transform: translateX(25%);  /* 向右偏移一个位置的距离 */
-}
-
 .winner-card {
-    width: 100px;  /* 稍微调整卡片大小 */
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 8px;
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    padding: 8px;
-    margin: 0;  /* 移除原有margin，使用gap控制间距 */
     transition: transform 0.3s ease;  /* 添加过渡效果 */
+    width: 70px;
+    border: 1px solid blanchedalmond;
 }
 
 .winner-avatar {
@@ -621,8 +598,9 @@ body {
 }
 
 .winner-name {
-    margin-top: 8px;
-    font-size: 13px;
+    margin: 8px 0;
+    font-size: 20px;
+    font-weight: 600;
     color: #fff;
     text-align: center;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -763,10 +741,13 @@ body {
 }
 
 .prize-section.hidden-prize .winner-name {
-    margin-top: 10px;
-    font-size: 14px;
     width: 100%;
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
     text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;  /* 防止名字换行 */
 }
 
 .tableCont::-webkit-scrollbar {
@@ -917,36 +898,6 @@ body {
 
 /* 每一行的通用样式 */
 .prize-section:not(.hidden-prize) .winners-row {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-/* 7人布局 */
-.prize-section:not(.hidden-prize) .winners-grid.seven-winners .winners-row:first-child {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-.prize-section:not(.hidden-prize) .winners-grid.seven-winners .winners-row:last-child {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-/* 5人布局 */
-.prize-section:not(.hidden-prize) .winners-grid.five-winners .winners-row:first-child {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-.prize-section:not(.hidden-prize) .winners-grid.five-winners .winners-row:last-child {
-    width: 100%;
     display: flex;
     justify-content: center;
     gap: 15px;

@@ -474,9 +474,6 @@ const showNewLuckMemberResult = () => {
             const winner = memberList[index];
             winnersHtml += `
                 <div class="winner-card">
-                    <div class="winner-avatar">
-                        <img src="./statics/images/member/${winner.name}.png" alt="${winner.name}">
-                    </div>
                     <div class="winner-name">${winner.name}</div>
                 </div>
             `;
@@ -501,28 +498,12 @@ const showNewLuckMemberResult = () => {
             const prizeWinners = globalProps.nowLuckMemberIndexArr
                 .slice(startIndex, startIndex + prize.memberNum);
             
-            const winnerCount = prizeWinners.length;
-            const gridClass = winnerCount === 5 ? 'five-winners' : 'seven-winners';
-            
-            // 分割获奖者为两行
-            let firstRow, secondRow;
-            if (winnerCount === 5) {
-                firstRow = prizeWinners.slice(0, 2);
-                secondRow = prizeWinners.slice(2);
-            } else {
-                firstRow = prizeWinners.slice(0, 3);
-                secondRow = prizeWinners.slice(3);
-            }
-
             // 生成行HTML
             const generateRowHtml = (winners) => {
                 return winners.map(index => {
                     const winner = memberList[index];
                     return `
                         <div class="winner-card">
-                            <div class="winner-avatar">
-                                <img src="./statics/images/member/${winner.name}.png" alt="${winner.name}">
-                            </div>
                             <div class="winner-name">${winner.name}</div>
                         </div>
                     `;
@@ -536,9 +517,8 @@ const showNewLuckMemberResult = () => {
                     <div class="prize-image">
                         <img src="./statics/images/prize-min/${prize.id}.png" alt="${prize.name}"/>
                     </div>
-                    <div class="winners-grid ${gridClass}">
-                        <div class="winners-row">${generateRowHtml(firstRow)}</div>
-                        <div class="winners-row">${generateRowHtml(secondRow)}</div>
+                    <div class="winners-grid">
+                        <div class="winners-row">${generateRowHtml(prizeWinners)}</div>
                     </div>
                 </div>
             `;

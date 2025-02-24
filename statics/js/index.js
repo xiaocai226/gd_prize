@@ -526,7 +526,7 @@ const showNewLuckMemberResult = () => {
             startIndex += prize.memberNum;
             
             return `
-                <div class="prize-section">
+                <div class="prize-section hidden-prize">
                     <div class="prize-image">
                         <img src="./statics/images/prize-min/${prize.id}.png" alt="${prize.name}"/>
                     </div>

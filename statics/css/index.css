@@ -6,6 +6,7 @@ html {
     height: 100vh; /* 设置为视口高度 */
     display: flex;
     align-items: center; /* 垂直居中 */
+    background-color: black;
 }
 
 body {
@@ -538,27 +539,6 @@ body {
     height: 30px;
 }
 
-.prize-name {
-    margin-top: 10px;
-    font-size: 24px;
-    color: #333;
-    text-align: center;
-}
-
-.winners-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: calc(100% - 60px);
-    max-height: calc(100% - 60px);
-    overflow: auto;
-    padding: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .winners-grid {
     width: 100%;
     display: flex;
@@ -600,28 +580,6 @@ body {
     white-space: nowrap;
 }
 
-.winner-avatar {
-    width: 75px;  /* 调整头像大小 */
-    height: 75px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid #fff;
-}
-
-.winner-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.winner-prize {
-    margin-top: 10px;
-    font-size: 18px;
-    color: #e56e6e;
-    font-weight: bold;
-}
-
 #result .close-btn {
     position: absolute;
     top: 20px;
@@ -646,15 +604,6 @@ body {
 
 .prize-image + .prize-image {
     margin-left: 0;
-}
-
-.prize-images {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    display: flex;
-    gap: 10px;
-    z-index: 1;
 }
 
 .prize-sections {
@@ -741,11 +690,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.prize-section.hidden-prize .winner-avatar {
-    width: 85px;
-    height: 85px;
 }
 
 .prize-section.hidden-prize .winner-name {
@@ -837,15 +781,6 @@ body {
     animation: fadeInUp 0.3s ease forwards;
 }
 
-/* 删除之前的hover相关样式 */
-/* .export-container:hover .export-dropdown,
-.export-dropdown:hover {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-} */
-
 /* 添加一个透明的缓冲区域 */
 .export-dropdown::before {
     content: '';
@@ -931,13 +866,4 @@ body {
 
 .hide-btn:hover {
     color: rgba(255, 255, 255, 0.3);
-}
-
-.winners-center-container {
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;  /* 添加卡片之间的间距 */
-    flex-wrap: wrap;  /* 确保在需要时可以换行 */
 }

@@ -42,8 +42,6 @@ const getCanvasSpeed = () => {
 const generateMemberListHtml = () => {
     const html = [`<ul>`]
     memberList.forEach((member, index) => {
-        // <img src="./statics/images/member/${member.name}.png" 
-        // alt="${member.name}">
         html.push(`
             <li> 
                 <a>

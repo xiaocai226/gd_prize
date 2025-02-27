@@ -1,9 +1,7 @@
 const memberList = [
     { name: '钟景贤' },
     { name: '郑勇强' },
-    { name: '童建华' },
     { name: '马锡裕' },
-    { name: '李剑波' },
     { name: '利民启' },
     { name: '唐小明' },
     { name: '曹国文' },
@@ -14,7 +12,6 @@ const memberList = [
     { name: '尹宏文' },
     { name: '郑泽娜' },
     { name: '张灿仰' },
-    { name: '梁焯辉' },
     { name: '李昆鹏' },
     { name: '王辉' },
     { name: '江华初' },
